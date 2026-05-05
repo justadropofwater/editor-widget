@@ -1,39 +1,39 @@
 {
   "name": "editor-widget",
-  "version": "1.1.1",
-  "description": "Editor widget used by slap-editor/slap",
+  "version": "2.0.0",
+  "description": "Editor widget used by slap-editor/slap (modernized fork)",
   "main": "index.js",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
-    "base-widget": "1.1.0",
     "blessed": "0.1.81",
-    "bluebird": "3.4.1",
-    "cheerio": "^0.20.0",
-    "copy-paste": "^1.1.4",
-    "es6-set": "0.1.4",
-    "highlight.js": "9.5.0",
-    "iconv-lite": "0.4.13",
-    "lodash": "3.10.1",
-    "minimist": "1.2.0",
-    "rc": "1.1.6",
-    "semver": "5.3.0",
-    "slap-util": "1.0.7",
-    "text-buffer": "8.0.6"
+    "cheerio": "^1.0.0",
+    "copy-paste": "^1.5.3",
+    "es6-set": "0.1.6",
+    "highlight.js": "^11.9.0",
+    "lodash": "4.17.21",
+    "minimist": "^1.2.8",
+    "rc": "1.2.8",
+    "text-buffer": "9.2.2"
   },
   "devDependencies": {
-    "get-random-port": "0.0.1",
-    "tape": "4.6.0"
+    "tape": "^5.7.5"
   },
   "scripts": {
-    "test": "spec/index.js"
+    "test": "node spec/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/slap-editor/editor-widget.git"
+    "url": "git+https://github.com/justadropofwater/editor-widget.git"
   },
   "author": "Dan Kaplun <dbkaplun@gmail.com>",
+  "contributors": [
+    "justadropofwater (https://github.com/justadropofwater)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/slap-editor/editor-widget/issues"
+    "url": "https://github.com/justadropofwater/editor-widget/issues"
   },
-  "homepage": "https://github.com/slap-editor/editor-widget#readme"
+  "homepage": "https://github.com/justadropofwater/editor-widget#readme"
 }

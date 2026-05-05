@@ -1,5 +1,33 @@
-# editor-widget [![Build Status](https://travis-ci.org/slap-editor/editor-widget.svg?branch=master)](https://travis-ci.org/slap-editor/editor-widget)
-Editor widget for blessed used by the [slap](https://github.com/slap-editor/slap) text editor
+# editor-widget
+
+Editor widget for [blessed](https://github.com/chjj/blessed) used by the
+[slap](https://github.com/justadropofwater/slap) text editor.
+
+This is a modernized fork of
+[slap-editor/editor-widget](https://github.com/slap-editor/editor-widget),
+maintained alongside the
+[justadropofwater/slap](https://github.com/justadropofwater/slap) fork.
+
+## What changed in 2.0.0
+
+The 1.x line targeted Node 4/6 with a deep stack of abandoned dependencies.
+The 2.0 modernization preserves the public API while:
+
+* **Native `async`/`await`** -- Bluebird removed; `Editor.open`, `Editor.save`,
+  `Editor.exists`, `Editor.copy`, `Editor.paste` and the highlight client all
+  use native `Promise`.
+* **ES6 classes** -- `Editor` and `Field` use `class ... extends ...` instead
+  of prototype chains and the `__proto__` assignment trick.
+* **Self-contained** -- the previously-external `base-widget` and `slap-util`
+  packages are inlined into `lib/BaseWidget.js` and `lib/util/`, so no more
+  abandoned `slap-editor/*` deps in the tree.
+* **Single `text-buffer` line** -- pinned to 9.2.2 so consumers don't end up
+  with two text-buffer copies (1.x previously dragged in `text-buffer@8.0.6`
+  while base-widget pulled `text-buffer@9.2.2`).
+* **Modern deps** -- `cheerio` 1.x, `highlight.js` 11.x, lodash 4.x, native
+  `fs.promises` and `util.promisify` instead of `Promise.promisifyAll`.
+* **GitHub Actions** -- replaces Travis CI; tests on Node 20 and 22.
+* `engines: { "node": ">=20" }`.
 
 ## Example
 
@@ -7,9 +35,8 @@ Editor widget for blessed used by the [slap](https://github.com/slap-editor/slap
 const blessed = require('blessed');
 const Editor = require('editor-widget');
 
-const screen = blessed.screen({smartCSR: true, title: "editor-widget example"});
+const screen = blessed.screen({ smartCSR: true, title: 'editor-widget example' });
 const editor = new Editor({
-  // normal blessed widget, use like you would any other blessed element
   parent: screen,
   top: 0,
   left: 0,
@@ -19,14 +46,12 @@ const editor = new Editor({
 
 const filePath = './file.txt';
 editor.open(filePath);
-screen.key(['C-s'], (ch, key) => { editor.save(filePath); });
+screen.key(['C-s'], () => { editor.save(filePath); });
 
-screen.key(['escape', 'q', 'C-c'], (ch, key) => { process.exit(0); });
+screen.key(['escape', 'q', 'C-c'], () => { process.exit(0); });
 screen.render();
 ```
 
-## In use
-Here are some projects that use editor-widget:
+## License
 
-* [slap](https://github.com/slap-editor/slap)
-* [derhuerst/js-playgrounds](https://github.com/derhuerst/js-playgrounds)
+MIT

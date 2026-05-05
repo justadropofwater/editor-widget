@@ -5,5 +5,8 @@ var Editor = require('../.');
 
 var screen = new blessed.Screen();
 screen.key('C-q', function () { process.exit(); });
-var editor = new Editor({parent: screen});
-editor.open(__filename).done();
+var editor = new Editor({ parent: screen });
+editor.open(__filename).catch(function (err) {
+  console.error(err.stack || err);
+  process.exit(1);
+});

@@ -5,6 +5,30 @@ All notable changes to this fork are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-05-05
+
+Adds optional per-line git diff markers in the editor gutter. Consumers
+opt in by setting `editor.gitDiff` to an object of the form
+`{ added: Set<row>, modified: Set<row>, deletedAtRow: Set<row> }` and
+calling `editor._updateContent()` to re-render. When `gitDiff` is
+falsy (the default) the gutter renders exactly as before.
+
+The marker char consumes one column out of the existing
+`gutterWidth` budget, so the gutter shape doesn't shift when diff data
+appears or disappears. Style hooks live under `editor.style.git`:
+
+```ini
+[editor.style.git]
+added = "{green-fg}{bold}"
+modified = "{yellow-fg}{bold}"
+deleted = "{red-fg}{bold}"
+```
+
+Marker glyphs: U+2503 (heavy vertical bar) for added/modified, U+2581
+(lower one-eighth block) for the row immediately following a deletion.
+
+No public-API changes; existing consumers are unaffected.
+
 ## [2.0.0] - 2026-05-05
 
 First release of the modernized fork of
@@ -88,4 +112,5 @@ which consumes this package via a packed tarball.
   to `markPosition` + `setProperties`. `markRange` still accepts custom
   properties (with a deprecation warning) and is unaffected.
 
+[2.1.0]: https://github.com/justadropofwater/editor-widget/releases/tag/v2.1.0
 [2.0.0]: https://github.com/justadropofwater/editor-widget/releases/tag/v2.0.0

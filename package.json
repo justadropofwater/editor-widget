@@ -1,6 +1,6 @@
 {
   "name": "editor-widget",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Editor widget used by slap-editor/slap (modernized fork)",
   "main": "index.js",
   "engines": {

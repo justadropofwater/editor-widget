@@ -5,6 +5,19 @@ All notable changes to this fork are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- `lib/highlight/client.js` no longer poisons its respawn promise chain
+  when the editor signals shutdown via `dontRespawn`. Previously
+  `client.kill()` returned a boolean that became the `client` argument
+  on the next spawn cycle, then `client.listeners` blew up with
+  `TypeError: client.listeners is not a function` whenever a second
+  Editor instance was created in the same process (e.g. across tape
+  test cases). The kill path now resolves to `null` and the listeners
+  read defensively guards against non-EventEmitter values.
+
 ## [2.1.0] - 2026-05-05
 
 Adds optional per-line git diff markers in the editor gutter. Consumers
